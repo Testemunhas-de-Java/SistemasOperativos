@@ -5,11 +5,13 @@
 
 typedef struct Process {
 	int id;
-	int arrival;
-	int instruction;
-	int variable;
+	char* arrival;
+	char* instruction;
+	//int variable;
 	
 } Process;
+
+struct Process Processos[4];
 
 int Running(char *Instructions) {
 	puts(Instructions);
@@ -19,11 +21,11 @@ int Running(char *Instructions) {
 
 int Ready(char *storage[]){
 	printf("debug Storage %s %s %s %s" ,storage[0], storage[1], storage[2], storage[3]);
-	char *Arrive;
+	//char *Arrive;
 	char *Inst;
-	Arrive = strdup(storage[0]);
-	Arrive = strtok(Arrive," ");
-	printf("tempo de chegada %s \n" ,Arrive);
+	//Arrive = strdup(storage[0]);
+	//Arrive = strtok(Arrive," ");
+	//printf("tempo de chegada %s \n" ,Arrive);
 	Inst = storage[0]+2;
 	puts(Inst);
 	//puts(storage[0]);
@@ -39,6 +41,7 @@ int main() {
 	char *storage[4];
 	int i = 0;
 	
+	
 	ficheiro = fopen("textoteste.txt","r");
 	
 	if(ficheiro == NULL) {
@@ -52,11 +55,22 @@ int main() {
 			//printf("print dentro do ciclo %s", storage[i]); 	//debug storage
 			i++;
 		}
-		//printf("print fora do ciclo %s", storage[1]);   //debug storage
-		Ready(storage);
+		printf("print fora do ciclo %s", storage[1]);   //debug storage
+		//Ready(storage);
 		fclose(ficheiro);
 		}
-		
+	char *Arrive;
+	char *Inst;
+	int a;
+	for ( a = 0; a < 4 ;a++){
+			Arrive = strdup(storage[a]);
+			Arrive = strtok(Arrive," ");
+			Processos[a].arrival = Arrive;
+			puts(Processos[a].arrival);
+			Inst = storage[a]+2;
+			Processos[a].instruction = Inst;
+			puts(Processos[a].instruction);
+				}
 	return 0;
 		
 	}
